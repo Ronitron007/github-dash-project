@@ -1,37 +1,39 @@
-import styled from 'styled-components';
+import { Link } from 'react-router-dom'
+import styled from 'styled-components'
 
-const UserCell = styled.a`
+const UserCell = styled.div`
   display: flex;
   text-decoration: none;
   flex-direction: row;
   align-items: center;
-  margin: 10px auto 10px auto;
-  width: 50vw;
-  background-color: #f5f5f5;
+  min-width: 14%;
+  border: 2px solid #d1d1d1;
   border-radius: 10px;
   padding: 10px;
   &:hover {
-    background-color: #51adf6ab;
+    border: 2px solid #51adf6ab;
   }
   h2 {
     margin-left: 1rem;
     color: #000;
   }
-`;
+`
 
-const UserAvatar = styled.img`
+export const UserAvatar = styled.img`
   width: 50px;
   height: 50px;
   border-radius: 50%;
-`;
+`
 
 const UserWrapper = ({ user }) => {
   return (
-    <UserCell className="mx-auto" href={user.html_url}>
-      <UserAvatar src={user.avatar_url} />
-      <h2 className="mx-4">{user.login}</h2>
-    </UserCell>
-  );
-};
+    <Link to={`/user/${user.login}`} style={{ textDecoration: 'none' }}>
+      <UserCell>
+        <UserAvatar src={user.avatar_url} />
+        <h2 className="mx-4">{user.login}</h2>
+      </UserCell>
+    </Link>
+  )
+}
 
-export default UserWrapper;
+export default UserWrapper

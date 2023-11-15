@@ -6,9 +6,11 @@ const Home = (props) => {
   const [userInput, setUserInput] = React.useState('')
 
   return (
-    <div>
-      <InputField userInput={userInput} setUserInput={setUserInput} />
-      <SearchResultContainer userInput={userInput} />
+    <div className="mx-auto w-full my-auto px-10 flex flex-row justify-center py-20">
+      <div className="mx-auto absolute">
+        <InputField inputName={'User'} setSearchString={setUserInput} />
+      </div>
+      {userInput ? <SearchResultContainer userInput={userInput} /> : null}
     </div>
   )
 }

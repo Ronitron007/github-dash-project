@@ -5,27 +5,28 @@ import UserWrapper from './UserListing'
 
 const ResultsContainer = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   width: 100%;
+  column-gap: 1%;
+  row-gap: 1rem;
   height: 100%;
+  margin-top: 80px;
 `
 
 const SearchResultContainer = (props) => {
   const { userInput } = props
   const { data, isLoading, error } = useSearchUsersQuery(userInput)
 
-  console.log(data, userInput)
-
   return (
     <>
-      <ResultsContainer>
+      <ResultsContainer className="mx-auto">
         {isLoading ? (
           <p>Loading...</p>
         ) : error ? (
-          <p>Error :(</p>
+          <p>Error :{`(`}</p>
         ) : (
           data.items.map((user) => <UserWrapper key={user.id} user={user} />)
         )}

@@ -4,31 +4,36 @@ import React, { useCallback, useEffect } from 'react'
 import styled from 'styled-components'
 
 const ClearButton = styled.button`
+  float: right;
+  top: -2.5rem;
   position: relative;
+  background: none;
   border: none;
   width: min-content;
-  left: -6rem;
+  left: 0rem;
   color: #9a9a9a;
   font-size: 1rem;
-  font-weight: 400;
-  background-color: #ffffff;
-  &:hover {
+  font-weig &:hover {
     color: #000000;
+  }
+  &:focus,
+  &:focus-visible {
+    outline: none;
   }
 `
 
 const InputField = (props) => {
-  const { userInput, setUserInput } = props
+  const { setSearchString, inputName } = props
   const [inputField, setInputField] = React.useState('')
   let debouncedFunc = useCallback(
-    _.debounce(setUserInput, 250, {
+    _.debounce(setSearchString, 250, {
       leading: true,
       trailing: true,
     }),
     [],
   )
   const clearInput = () => {
-    setUserInput('')
+    setSearchString('')
     setInputField('')
   }
   const handleInputChange = (e) => {
@@ -36,18 +41,19 @@ const InputField = (props) => {
     debouncedFunc(e.target.value)
   }
   return (
-    <>
+    <div className="w-500 mx-auto">
       <TextField
+        fullWidth
         variant="standard"
-        label="Search User"
+        label={`Search ${inputName}`}
         id="standard"
         value={inputField}
         onChange={(e) => handleInputChange(e)}
       />
       <ClearButton onClick={clearInput}>
-        {userInput ? 'clear' : null}
+        {inputField ? 'clear' : null}
       </ClearButton>
-    </>
+    </div>
   )
 }
 
