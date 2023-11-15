@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import moment from 'moment'
 
-const authToken = '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'
+const authToken = import.meta.env.VITE_REACT_APP_GITHUB_AUTH_TOKEN
 
 const githubApi = createApi({
   reducerPath: 'githubApi',
